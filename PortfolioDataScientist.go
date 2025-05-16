@@ -12,27 +12,33 @@ type Project struct {
 
 func main() {
 	menu()
-	
 }
+
 func menu(){
 	var data projects
 	var nProject int
-	for { 
-	fmt.Println("----------------------------------")
-	fmt.Println("|---Selamat Datang di Aplikasi---|")
-	fmt.Println("----------------------------------")
-	fmt.Println("1. Project User")
-	fmt.Println("2. Cari Project User")
-	fmt.Println("3. Urutkan Project User")
-	fmt.Println("4. Keluar Dari Aplikasi")
-	fmt.Print("pilih :")
 	var pilihan int
-	fmt.Scan(&pilihan)
+	
+	for { 
+		fmt.Println("----------------------------------")
+		fmt.Println("|---Selamat Datang di Aplikasi---|")
+		fmt.Println("----------------------------------")
+		fmt.Println("1. Proyek User")
+		fmt.Println("2. Cari Proyek User")
+		fmt.Println("3. Urutkan Proyek User")
+		fmt.Println("4. Keluar Dari Aplikasi")
+		fmt.Println("----------------------------------")
+		
+		fmt.Print("pilih :")
+		fmt.Scan(&pilihan)
+		
 		switch pilihan {'
 			case 1:
-				ProjectUser(&data, &nProject)
 				var pilih int
+				
+				ProjectUser(&data, &nProject)
 				fmt.Scan(&pilih)
+				
 				switch pilih {
 					case 1:
 						tambahProject(&data, &nProject)
@@ -42,15 +48,24 @@ func menu(){
 						ubahProject(&data, nProject)
 					//case 4:
 						//hapusProject()
-					}
-			//case 2:
-				//cariProject
+				}
+				
+			case 2:
+				seqSearch(data, nProject)
+				//binSearch(data, nProject)
+				
 			//case 3:
-			//case 4:
+				//selSort(data, nProject)
+				//insSort(data, nProject)
+				
+			case 4:
+				fmt.Println("Terima kasih")
+				break
+		
 			default :
-				fmt.Println("Pilihan tidak valid!")
-			}
+					fmt.Println("Pilihan tidak valid!")
 		}
+	}
 }
 
 func ProjectUser(p *projects, nProject *int) {
@@ -67,6 +82,7 @@ func tambahProject (p *projects, nProject *int) {
 	fmt.Scan(&p[*nProject].nama)
 	fmt.Print("Tingkat kesulitan (1-10): ")
 	fmt.Scan(&p[*nProject].tingkatKesulitan)
+	
 	fmt.Print("kategori: ")
 	fmt.Scan(&p[*nProject].kategori)
 	fmt.Print("Waktu (dd-mm-yyyy): ")
@@ -92,26 +108,85 @@ func tampilkanProject (p projects, nProject int) {
 		fmt.Println()
 	} 
 }
+
 func ubahProject(p *projects, nProject int) {
 	tampilkanProject(*p, nProject)
 		fmt.Print("Pilih nomor yang ingin diubah :")
+		
 	var ubah int
 		fmt.Scan(&ubah)
 		ubah--
+		
 		if ubah >= 0 && ubah < nProject {
 			fmt.Print("Nama Project baru : ")
 			fmt.Scan(&p[ubah].nama)
 			fmt.Print("Tingkat kesulitan (1-10): ")
 			fmt.Scan(&p[ubah].tingkatKesulitan)
+			
 			fmt.Print("kategori: ")
 			fmt.Scan(&p[ubah].kategori)
 			fmt.Print("Waktu (dd-mm-yyyy): ")
 			fmt.Scan(&p[ubah].waktu)
 			fmt.Println()
+			
 			fmt.Println("Project berhasil diubah!!")
 		} else {
 			fmt.Println()
 			fmt.Println("Nomor tidak sesuai!!")
 			fmt.Println()
 		}
+}
+
+func seqSearch(p projects, n int) {
+	var i, idx int
+	var x string
+	
+	i = 0
+	idx = -1
+	
+	fmt.Print("Masukan nama proyek yang ingin dicari: ")
+	fmt.Scan(&x)
+	
+	for i < n && idx == -1{
+		if p[i] == x {
+			idx = i
+		}
+		i++
+	}
+	
+	if idx != -1 {
+		fmt.Prinf("[%d] Nama: &s | Kategori: &s | Tingkat kesulitan: $d | Waktu: &s", idx, p[idx].nama, p[idx].kategori, p[idx].tingkatKesulitan, p[idx].waktu)
+		fmt.Println()
+	} else {
+		fmt.Println("Proyek tidak ditemukan")
+	}
+}
+
+func binSearch(p projects, n int) {
+	var kanan, kiri, tengah int
+	var idx int
+	var x string
+	
+	idx = -1
+	kiri = 0
+	kanan = n - 1
+	
+	for kiri <= kanan && idx == -1 {
+		tengah = (kiri + kanan)/ 2
+		
+		if x > tengah {
+			kiri = tengah + 1
+		} else if x < tengah {
+			kanan = tengah - 1
+		} else {
+			idx = tengah
+		}
+	}
+	
+	if idx != -1 {
+		fmt.Prinf("[%d] Nama: &s | Kategori: &s | Tingkat kesulitan: $d | Waktu: &s", idx, p[idx].nama, p[idx].kategori, p[idx].tingkatKesulitan, p[idx].waktu)
+		fmt.Println()
+	} else {
+		fmt.Println("Proyek tidak ditemukan")
+	}
 }
