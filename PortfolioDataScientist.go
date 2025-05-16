@@ -89,9 +89,11 @@ func tambahProject (p *projects, nProject *int) {
 	fmt.Scan(&p[*nProject].waktu)
 	
 	*nProject = *nProject + 1
+	
 	fmt.Println("Project berhasil ditambahkan!!!")
 	fmt.Println()
 }
+
 func tampilkanProject (p projects, nProject int) {
 	if nProject == 0 {
 		fmt.Println("Maaf Data Belum Tersedia")
@@ -111,7 +113,7 @@ func tampilkanProject (p projects, nProject int) {
 
 func ubahProject(p *projects, nProject int) {
 	tampilkanProject(*p, nProject)
-		fmt.Print("Pilih nomor yang ingin diubah :")
+	fmt.Print("Pilih nomor yang ingin diubah :")
 		
 	var ubah int
 		fmt.Scan(&ubah)
