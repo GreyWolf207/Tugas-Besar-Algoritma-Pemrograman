@@ -51,8 +51,18 @@ func menu(){
 				}
 				
 			case 2:
-				seqSearch(data, nProject)
-				//binSearch(data, nProject)
+				var pilih int
+				
+				fmt.Println("1. Cari berdasarkan nama")
+				fmt.Println("2. Cari berdasarkan kategori")
+				fmt.Scan(&pilih)
+				
+				switch pilih {
+					case 1 :
+						seqSearch(data, nProject)
+					case 2 :
+						//binSearch(data, nProject)
+				}
 				
 			//case 3:
 				//selSort(data, nProject)
@@ -173,6 +183,9 @@ func binSearch(p projects, n int) {
 	kiri = 0
 	kanan = n - 1
 	
+	fmt.Print("Masukan kategori proyek yang ingin dicari: ")
+	fmt.Scan(&x)
+	
 	for kiri <= kanan && idx == -1 {
 		tengah = (kiri + kanan)/ 2
 		
@@ -191,4 +204,12 @@ func binSearch(p projects, n int) {
 	} else {
 		fmt.Println("Proyek tidak ditemukan")
 	}
+}
+
+func selSort() {
+	
+}
+
+func insSort() {
+	
 }
