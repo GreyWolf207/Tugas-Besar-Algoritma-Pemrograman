@@ -160,7 +160,7 @@ func seqSearch(p projects, n int) {
 	fmt.Scan(&x)
 	
 	for i < n && idx == -1{
-		if p[i] == x {
+		if p[i].nama == x {
 			idx = i
 		}
 		i++
