@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 
-type projects [100]Project
+const NMAX int = 100
+type projects [NMAX]Project
 type Project struct {
 	nama string
 	kategori string
@@ -20,24 +21,24 @@ func menu(){
 	var pilihan int
 	
 	for { 
-		fmt.Println("----------------------------------")
-		fmt.Println("|---Selamat Datang di Aplikasi---|")
-		fmt.Println("----------------------------------")
+		fmt.Println("----------------------------------------")
+		fmt.Println("|------Selamat Datang di Aplikasi------|")
+		fmt.Println("----------------------------------------")
 		fmt.Println("1. Proyek User")
 		fmt.Println("2. Cari Proyek User")
 		fmt.Println("3. Urutkan Proyek User")
 		fmt.Println("4. Keluar Dari Aplikasi")
-		fmt.Println("----------------------------------")
+		fmt.Println("----------------------------------------")
 		
-		fmt.Print("pilih :")
+		fmt.Print("pilih: ")
 		fmt.Scan(&pilihan)
+		fmt.Println()
 		
-		switch pilihan {'
+		switch pilihan {
 			case 1:
 				var pilih int
 				
-				ProjectUser(&data, &nProject)
-				fmt.Scan(&pilih)
+				pilih = ProjectUser(&data, &nProject)
 				
 				switch pilih {
 					case 1:
@@ -53,9 +54,14 @@ func menu(){
 			case 2:
 				var pilih int
 				
+				fmt.Println("----------------------------------------")
 				fmt.Println("1. Cari berdasarkan nama")
 				fmt.Println("2. Cari berdasarkan kategori")
+				fmt.Println("----------------------------------------")
+				
+				fmt.Print("Pilih: ")
 				fmt.Scan(&pilih)
+				fmt.Println()
 				
 				switch pilih {
 					case 1 :
@@ -64,26 +70,50 @@ func menu(){
 						//binSearch(data, nProject)
 				}
 				
-			//case 3:
-				//selSort(data, nProject)
-				//insSort(data, nProject)
+			case 3:
+				var pilih int
 				
-			case 4:
-				fmt.Println("Terima kasih")
-				break
+				fmt.Println("----------------------------------------")
+				fmt.Println("1. Urutkan berdasarkan tingkat kesulitan")
+				fmt.Println("2. Urutkan berdasarkan waktu")
+				fmt.Println("----------------------------------------")
+				
+				fmt.Print("Pilih: ")
+				fmt.Scan(&pilih)
+				fmt.Println()
+				
+				switch pilih {
+					case 1 :
+						selSort(&data, nProject)
+					case 2 :
+						//insSort(data, nProject)
+				}
 		
 			default :
 					fmt.Println("Pilihan tidak valid!")
 		}
+		
+		if pilihan == 4 {
+			break
+		}
 	}
 }
 
-func ProjectUser(p *projects, nProject *int) {
+func ProjectUser(p *projects, nProject *int) int {
+	var pilih int
+	
+	fmt.Println("----------------------------------------")
 	fmt.Println("1. Tambah Project")
 	fmt.Println("2. Tampilkan Semua Project")
 	fmt.Println("3. Ubah Project")
 	fmt.Println("4. Hapus Project")
-	fmt.Print("Pilih :")
+	fmt.Println("----------------------------------------")
+	
+	fmt.Print("Pilih: ")
+	fmt.Scan(&pilih)
+	fmt.Println()
+	
+	return pilih
 }
 
 func tambahProject (p *projects, nProject *int) {
@@ -109,16 +139,18 @@ func tampilkanProject (p projects, nProject int) {
 		fmt.Println("Maaf Data Belum Tersedia")
 	}
 	
-	
 	for i := 0; i < nProject; i++ {
+		fmt.Println("|--------------------------------------|")
 		fmt.Println("[Project]", i+1)
 		fmt.Println()
-		fmt.Println("Nama Project :", p[i].nama)
-		fmt.Println("kategori", p[i].kategori)
-		fmt.Println("Tingkat kesulitan (1-10):", p[i].tingkatKesulitan )
-		fmt.Println("Waktu (dd-mm-yyyy)", p[i].waktu)
-		fmt.Println()
+		fmt.Println("Nama Project:" , p[i].nama)
+		fmt.Println("kategori: ", p[i].kategori)
+		fmt.Println("Tingkat kesulitan (1-10): ", p[i].tingkatKesulitan )
+		fmt.Println("Waktu (dd-mm-yyyy): ", p[i].waktu)
 	} 
+	
+	fmt.Println("|--------------------------------------|")
+	fmt.Println()
 }
 
 func ubahProject(p *projects, nProject int) {
@@ -158,6 +190,7 @@ func seqSearch(p projects, n int) {
 	
 	fmt.Print("Masukan nama proyek yang ingin dicari: ")
 	fmt.Scan(&x)
+	fmt.Println()
 	
 	for i < n && idx == -1{
 		if p[i].nama == x {
@@ -167,7 +200,14 @@ func seqSearch(p projects, n int) {
 	}
 	
 	if idx != -1 {
-		fmt.Prinf("[%d] Nama: &s | Kategori: &s | Tingkat kesulitan: $d | Waktu: &s", idx, p[idx].nama, p[idx].kategori, p[idx].tingkatKesulitan, p[idx].waktu)
+		fmt.Println("|--------------------------------------|")
+		fmt.Println("[Project]", idx + 1)
+		fmt.Println()
+		fmt.Println("Nama Project: ", p[idx].nama)
+		fmt.Println("kategori: ", p[idx].kategori)
+		fmt.Println("Tingkat kesulitan (1-10):", p[idx].tingkatKesulitan )
+		fmt.Println("Waktu (dd-mm-yyyy): ", p[idx].waktu)
+		fmt.Println("|--------------------------------------|")
 		fmt.Println()
 	} else {
 		fmt.Println("Proyek tidak ditemukan")
@@ -185,13 +225,14 @@ func binSearch(p projects, n int) {
 	
 	fmt.Print("Masukan kategori proyek yang ingin dicari: ")
 	fmt.Scan(&x)
+	fmt.Println()
 	
 	for kiri <= kanan && idx == -1 {
 		tengah = (kiri + kanan)/ 2
 		
-		if x > tengah {
+		if x > p[tengah].kategori {
 			kiri = tengah + 1
-		} else if x < tengah {
+		} else if x < p[tengah].kategori {
 			kanan = tengah - 1
 		} else {
 			idx = tengah
@@ -199,15 +240,41 @@ func binSearch(p projects, n int) {
 	}
 	
 	if idx != -1 {
-		fmt.Prinf("[%d] Nama: &s | Kategori: &s | Tingkat kesulitan: $d | Waktu: &s", idx, p[idx].nama, p[idx].kategori, p[idx].tingkatKesulitan, p[idx].waktu)
+		fmt.Println("|--------------------------------------|")
+		fmt.Println("[Project]", idx + 1)
+		fmt.Println()
+		fmt.Println("Nama Project: ", p[idx].nama)
+		fmt.Println("kategori: ", p[idx].kategori)
+		fmt.Println("Tingkat kesulitan (1-10): ", p[idx].tingkatKesulitan )
+		fmt.Println("Waktu (dd-mm-yyyy): ", p[idx].waktu)
+		fmt.Println("|--------------------------------------|")
 		fmt.Println()
 	} else {
 		fmt.Println("Proyek tidak ditemukan")
 	}
 }
 
-func selSort() {
+func selSort(p *projects, n int) {
+	var pass, idx, temp, i int
+	pass = 1
 	
+	for pass <= n-1 {
+		idx = pass - 1
+		i = pass
+		
+		for i < n {
+			if p[idx].tingkatKesulitan < p[i].tingkatKesulitan {
+				idx = 1
+			}
+			i++
+		}
+		
+		temp = p[pass - 1].tingkatKesulitan
+		p[pass - 1].tingkatKesulitan = p[idx].tingkatKesulitan
+		p[idx].tingkatKesulitan = temp
+		
+		pass++
+	}
 }
 
 func insSort() {
