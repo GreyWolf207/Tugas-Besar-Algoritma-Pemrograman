@@ -38,7 +38,7 @@ func menu(){
 			case 1:
 				var pilih int
 				
-				pilih = ProjectUser(&data, &nProject)
+				pilih = ProjectUser(data, nProject)
 				
 				switch pilih {
 					case 1:
@@ -99,7 +99,7 @@ func menu(){
 	}
 }
 
-func ProjectUser(p *projects, nProject *int) int {
+func ProjectUser(p projects, nProject int) int {
 	var pilih int
 	
 	fmt.Println("----------------------------------------")
