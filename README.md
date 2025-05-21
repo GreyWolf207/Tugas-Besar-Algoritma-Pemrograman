@@ -1,0 +1,7 @@
+|---------------------------------------------------------------------|
+ Tugas Besar Algoritma Pemrograman
+ Tema      : Aplikasi Manajemen Portofolio Data Scientist untuk Pemula
+ Kelompok  : NasGor Special
+ Anggota   : - Raissa Anargya Putra Prasetyo
+             - Muhammad Nashwa Irfani Ahimsa
+|---------------------------------------------------------------------|
