@@ -21,16 +21,16 @@ func menu(){
 	var pilihan int
 	
 	for { 
-		fmt.Println("----------------------------------------")
-		fmt.Println("|------Selamat Datang di Aplikasi------|")
-		fmt.Println("----------------------------------------")
-		fmt.Println("1. Proyek User")
-		fmt.Println("2. Cari Proyek User")
-		fmt.Println("3. Urutkan Proyek User")
-		fmt.Println("4. Keluar Dari Aplikasi")
-		fmt.Println("----------------------------------------")
+		fmt.Println("--------------------------------------------")
+		fmt.Println("|--------Selamat Datang di Aplikasi--------|")
+		fmt.Println("--------------------------------------------")
+		fmt.Println(" 1. Proyek User")
+		fmt.Println(" 2. Cari Proyek User")
+		fmt.Println(" 3. Urutkan Proyek User")
+		fmt.Println(" 4. Keluar Dari Aplikasi")
+		fmt.Println("--------------------------------------------")
 		
-		fmt.Print("pilih: ")
+		fmt.Print(" pilih: ")
 		fmt.Scan(&pilihan)
 		fmt.Println()
 		
@@ -54,12 +54,12 @@ func menu(){
 			case 2:
 				var pilih int
 				
-				fmt.Println("----------------------------------------")
-				fmt.Println("1. Cari berdasarkan nama")
-				fmt.Println("2. Cari berdasarkan kategori")
-				fmt.Println("----------------------------------------")
+				fmt.Println("--------------------------------------------")
+				fmt.Println(" 1. Cari berdasarkan nama")
+				fmt.Println(" 2. Cari berdasarkan kategori")
+				fmt.Println("--------------------------------------------")
 				
-				fmt.Print("Pilih: ")
+				fmt.Print(" Pilih: ")
 				fmt.Scan(&pilih)
 				fmt.Println()
 				
@@ -73,12 +73,12 @@ func menu(){
 			case 3:
 				var pilih int
 				
-				fmt.Println("----------------------------------------")
-				fmt.Println("1. Urutkan berdasarkan tingkat kesulitan")
-				fmt.Println("2. Urutkan berdasarkan waktu")
-				fmt.Println("----------------------------------------")
+				fmt.Println("--------------------------------------------")
+				fmt.Println(" 1. Urutkan berdasarkan tingkat kesulitan")
+				fmt.Println(" 2. Urutkan berdasarkan waktu")
+				fmt.Println("--------------------------------------------")
 				
-				fmt.Print("Pilih: ")
+				fmt.Print(" Pilih: ")
 				fmt.Scan(&pilih)
 				fmt.Println()
 				
@@ -102,14 +102,14 @@ func menu(){
 func ProjectUser(p projects, nProject int) int {
 	var pilih int
 	
-	fmt.Println("----------------------------------------")
-	fmt.Println("1. Tambah Project")
-	fmt.Println("2. Tampilkan Semua Project")
-	fmt.Println("3. Ubah Project")
-	fmt.Println("4. Hapus Project")
-	fmt.Println("----------------------------------------")
+	fmt.Println("--------------------------------------------")
+	fmt.Println(" 1. Tambah Project")
+	fmt.Println(" 2. Tampilkan Semua Project")
+	fmt.Println(" 3. Ubah Project")
+	fmt.Println(" 4. Hapus Project")
+	fmt.Println("--------------------------------------------")
 	
-	fmt.Print("Pilih: ")
+	fmt.Print(" Pilih: ")
 	fmt.Scan(&pilih)
 	fmt.Println()
 	
@@ -140,16 +140,16 @@ func tampilkanProject (p projects, nProject int) {
 	}
 	
 	for i := 0; i < nProject; i++ {
-		fmt.Println("|--------------------------------------|")
-		fmt.Println("[Project]", i+1)
+		fmt.Println("|------------------------------------------|")
+		fmt.Println(" [Project]", i+1)
 		fmt.Println()
-		fmt.Println("Nama Project:" , p[i].nama)
-		fmt.Println("kategori: ", p[i].kategori)
-		fmt.Println("Tingkat kesulitan (1-10): ", p[i].tingkatKesulitan )
-		fmt.Println("Waktu (dd-mm-yyyy): ", p[i].waktu)
+		fmt.Println(" Nama Project:" , p[i].nama)
+		fmt.Println(" kategori: ", p[i].kategori)
+		fmt.Println(" Tingkat kesulitan (1-10): ", p[i].tingkatKesulitan )
+		fmt.Println(" Waktu (dd-mm-yyyy): ", p[i].waktu)
 	} 
 	
-	fmt.Println("|--------------------------------------|")
+	fmt.Println("|------------------------------------------|")
 	fmt.Println()
 }
 
@@ -200,14 +200,14 @@ func seqSearch(p projects, n int) {
 	}
 	
 	if idx != -1 {
-		fmt.Println("|--------------------------------------|")
-		fmt.Println("[Project]", idx + 1)
+		fmt.Println("|------------------------------------------|")
+		fmt.Println(" [Project]", idx + 1)
 		fmt.Println()
-		fmt.Println("Nama Project: ", p[idx].nama)
-		fmt.Println("kategori: ", p[idx].kategori)
-		fmt.Println("Tingkat kesulitan (1-10):", p[idx].tingkatKesulitan )
-		fmt.Println("Waktu (dd-mm-yyyy): ", p[idx].waktu)
-		fmt.Println("|--------------------------------------|")
+		fmt.Println(" Nama Project: ", p[idx].nama)
+		fmt.Println(" kategori: ", p[idx].kategori)
+		fmt.Println(" Tingkat kesulitan (1-10):", p[idx].tingkatKesulitan )
+		fmt.Println(" Waktu (dd-mm-yyyy): ", p[idx].waktu)
+		fmt.Println("|------------------------------------------|")
 		fmt.Println()
 	} else {
 		fmt.Println("Proyek tidak ditemukan")
@@ -240,14 +240,14 @@ func binSearch(p projects, n int) {
 	}
 	
 	if idx != -1 {
-		fmt.Println("|--------------------------------------|")
-		fmt.Println("[Project]", idx + 1)
+		fmt.Println("|------------------------------------------|")
+		fmt.Println(" [Project]", idx + 1)
 		fmt.Println()
-		fmt.Println("Nama Project: ", p[idx].nama)
-		fmt.Println("kategori: ", p[idx].kategori)
-		fmt.Println("Tingkat kesulitan (1-10): ", p[idx].tingkatKesulitan )
-		fmt.Println("Waktu (dd-mm-yyyy): ", p[idx].waktu)
-		fmt.Println("|--------------------------------------|")
+		fmt.Println(" Nama Project: ", p[idx].nama)
+		fmt.Println(" kategori: ", p[idx].kategori)
+		fmt.Println(" Tingkat kesulitan (1-10):", p[idx].tingkatKesulitan )
+		fmt.Println(" Waktu (dd-mm-yyyy): ", p[idx].waktu)
+		fmt.Println("|------------------------------------------|")
 		fmt.Println()
 	} else {
 		fmt.Println("Proyek tidak ditemukan")
