@@ -264,14 +264,14 @@ func selSort(p *projects, n int) {
 		
 		for i < n {
 			if p[idx].tingkatKesulitan < p[i].tingkatKesulitan {
-				idx = 1
+				idx = i
 			}
 			i++
 		}
 		
-		temp = p[pass - 1].tingkatKesulitan
-		p[pass - 1].tingkatKesulitan = p[idx].tingkatKesulitan
-		p[idx].tingkatKesulitan = temp
+		temp = p[pass - 1]
+		p[pass - 1] = p[idx]
+		p[idx] = temp
 		
 		pass++
 	}
