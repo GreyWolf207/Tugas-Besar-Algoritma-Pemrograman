@@ -271,7 +271,7 @@ func selSort(p *projects, n int) {
 		
 		temp = p[pass - 1]
 		p[pass - 1] = p[idx]
-		p[idx] = temp
+		p[idx]= temp
 		
 		pass++
 	}
