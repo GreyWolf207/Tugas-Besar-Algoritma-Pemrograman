@@ -255,7 +255,8 @@ func binSearch(p projects, n int) {
 }
 
 func selSort(p *projects, n int) {
-	var pass, idx, temp, i int
+	var pass, idx, i int
+	var temp projects
 	pass = 1
 	
 	for pass <= n-1 {
