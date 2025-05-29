@@ -56,7 +56,7 @@ func menu(){
 				
 				fmt.Println("--------------------------------------------")
 				fmt.Println(" 1. Cari berdasarkan nama")
-				fmt.Println(" 2. Cari berdasarkan kategori")
+				fmt.Println(" 2. Cari berdasarkan tingkat kesulitan")
 				fmt.Println("--------------------------------------------")
 				
 				fmt.Print(" Pilih: ")
@@ -86,7 +86,7 @@ func menu(){
 					case 1 :
 						selSort(&data, nProject)
 					case 2 :
-						//insSort(data, nProject)
+						insSort(&data, nProject)
 				}
 		
 			default :
@@ -215,24 +215,23 @@ func seqSearch(p projects, n int) {
 }
 
 func binSearch(p projects, n int) {
-	var kanan, kiri, tengah int
+	var kanan, kiri, tengah, x int
 	var idx int
-	var x string
 	
 	idx = -1
 	kiri = 0
 	kanan = n - 1
 	
-	fmt.Print("Masukan kategori proyek yang ingin dicari: ")
+	fmt.Print("Masukan kesulitan proyek yang ingin dicari: ")
 	fmt.Scan(&x)
 	fmt.Println()
 	
 	for kiri <= kanan && idx == -1 {
 		tengah = (kiri + kanan)/ 2
 		
-		if x > p[tengah].kategori {
+		if x > p[tengah].tingkatKesulitan {
 			kiri = tengah + 1
-		} else if x < p[tengah].kategori {
+		} else if x < p[tengah].tingkatKesulitan {
 			kanan = tengah - 1
 		} else {
 			idx = tengah
