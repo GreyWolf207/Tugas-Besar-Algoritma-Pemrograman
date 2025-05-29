@@ -47,8 +47,8 @@ func menu(){
 						tampilkanProject(data, nProject)
 					case 3:
 						ubahProject(&data, nProject)
-					//case 4:
-						//hapusProject()
+					case 4:
+						hapusProject(&data, &nProject)
 				}
 				
 			case 2:
@@ -67,7 +67,7 @@ func menu(){
 					case 1 :
 						seqSearch(data, nProject)
 					case 2 :
-						//binSearch(data, nProject)
+						binSearch(data, nProject)
 				}
 				
 			case 3:
@@ -85,8 +85,10 @@ func menu(){
 				switch pilih {
 					case 1 :
 						selSort(&data, nProject)
+						tampilkanProject (data, nProject)
 					case 2 :
 						insSort(&data, nProject)
+						tampilkanProject (data, nProject)
 				}
 		
 			default :
@@ -181,6 +183,23 @@ func ubahProject(p *projects, nProject int) {
 		}
 }
 
+func hapusProject(p *projects, nProject *int) {
+	tampilkanProject(*p, *nProject)
+	fmt.Print("Pilih nomor proyek yang ingin dihapus: ")
+	var idx int
+	fmt.Scan(&idx)
+	idx--
+	if idx >= 0 && idx < *nProject {
+		for i := idx; i < *nProject-1; i++ {
+			p[i] = p[i+1]
+		}
+		*nProject--
+		fmt.Println("Proyek berhasil dihapus.")
+	} else {
+		fmt.Println("Indeks tidak valid.")
+	}
+}
+
 func seqSearch(p projects, n int) {
 	var i, idx int
 	var x string
@@ -255,7 +274,7 @@ func binSearch(p projects, n int) {
 
 func selSort(p *projects, n int) {
 	var pass, idx, i int
-	var temp projects
+	var temp Project
 	pass = 1
 	
 	for pass <= n-1 {
@@ -263,7 +282,7 @@ func selSort(p *projects, n int) {
 		i = pass
 		
 		for i < n {
-			if p[idx].tingkatKesulitan < p[i].tingkatKesulitan {
+			if p[idx].tingkatKesulitan > p[i].tingkatKesulitan {
 				idx = i
 			}
 			i++
@@ -271,12 +290,21 @@ func selSort(p *projects, n int) {
 		
 		temp = p[pass - 1]
 		p[pass - 1] = p[idx]
-		p[idx]= temp
+		p[idx] = temp
 		
 		pass++
 	}
 }
 
-func insSort() {
-	
+func insSort(p *projects, n int) {
+	for i := 1; i < n; i++ {
+		j := i - 1
+		temp := p[i]
+		
+		for j >= 0 && p[j].waktu > temp.waktu {
+			p[j+1] = p[j]
+			j--
+		}
+		p[j+1] = temp
+	}
 }
