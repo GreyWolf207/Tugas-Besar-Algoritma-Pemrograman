@@ -16,7 +16,7 @@ type projects [NMAX]Project
    - nama: Nama project (string).
    - kategori: Kategori project (string).
    - tingkatKesulitan: Tingkat kesulitan project (integer),skala 1-10.
-   - waktu: Waktu atau tanggal project (string), diharapkan dalam format seperti "dd-mm-yyyy".
+   - waktu: Waktu atau tanggal project (integer), diharapkan dalam format seperti "dd mm yyyy".
 */
 type Project struct {
 	nama             string
