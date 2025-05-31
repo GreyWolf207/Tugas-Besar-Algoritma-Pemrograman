@@ -22,7 +22,7 @@ type Project struct {
 	nama             string
 	kategori         string
 	tingkatKesulitan int
-	waktu            string
+	day, month, year int
 }
 
 	//main adalah fungsi utama program dan merupakan 
@@ -98,7 +98,7 @@ func menu() {
 
 			fmt.Println("-----------------------------------------------")
 			fmt.Println("| 1. -> Urutkan berdasarkan tingkat kesulitan |")
-			fmt.Println("| 2. -> Urutkan berdasarkan waktu             |")
+			fmt.Println("| 2. -> Urutkan berdasarkan tahun             |")
 			fmt.Println("-----------------------------------------------")
 
 			fmt.Print(" Pilih: ")
@@ -161,8 +161,8 @@ func tambahProject(p *projects, nProject *int) {
 
 	fmt.Print("Kategori: ")
 	fmt.Scan(&p[*nProject].kategori) // Meminta dan menyimpan kategori.
-	fmt.Print("Waktu (dd-mm-yyyy): ")
-	fmt.Scan(&p[*nProject].waktu) // Meminta dan menyimpan waktu.
+	fmt.Print("Waktu (dd mm yyyy): ")
+	fmt.Scan(&p[*nProject].day, &p[*nProject].month, &p[*nProject].year) // Meminta dan menyimpan waktu.
 
 	*nProject = *nProject + 1 // Menambah jumlah project setelah penambahan.
 
@@ -185,12 +185,12 @@ func tampilkanProject(p projects, nProject int) {
 
 	for i := 0; i < nProject; i++ { // Melakukan iterasi untuk setiap project.
 		fmt.Println("|------------------------------------------|")
-		ffmt.Println("|[Project]", idx+1, "|","                            |")
+		fmt.Println("|[Project]", i+1, "|","                            |")
 		fmt.Println("|------------------------------------------|")
 		fmt.Println(" Nama Project: ", p[i].nama)               // Menampilkan nama project.
 		fmt.Println(" kategori: ", p[i].kategori)               // Menampilkan kategori project.
 		fmt.Println(" Tingkat kesulitan (1-10): ", p[i].tingkatKesulitan) // Menampilkan tingkat kesulitan.
-		fmt.Println(" Waktu (dd-mm-yyyy): ", p[i].waktu)         // Menampilkan waktu project.
+		fmt.Println(" Waktu (dd mm yyyy): ", p[i].day, "-", p[i].month, "-", p[i].year) // Menampilkan waktu project.
 	}
 	fmt.Println("|------------------------------------------|")
 	fmt.Println()
@@ -218,8 +218,8 @@ func ubahProject(p *projects, nProject int) {
 
 		fmt.Print("kategori: ")
 		fmt.Scan(&p[ubah].kategori) // Meminta dan menyimpan kategori baru.
-		fmt.Print("Waktu (dd-mm-yyyy): ")
-		fmt.Scan(&p[ubah].waktu) // Meminta dan menyimpan waktu baru.
+		fmt.Print("Waktu (dd mm yyyy): ")
+		fmt.Scan(&p[ubah].day, &p[ubah].month, &p[ubah].year) // Meminta dan menyimpan waktu baru.
 		fmt.Println()
 
 		fmt.Println("Project berhasil diubah!!")
@@ -291,7 +291,7 @@ func seqSearch(p projects, n int) {
 		fmt.Println(" Nama Project: ", p[idx].nama)
 		fmt.Println(" kategori: ", p[idx].kategori)
 		fmt.Println(" Tingkat kesulitan (1-10): ", p[idx].tingkatKesulitan)
-		fmt.Println(" Waktu (dd-mm-yyyy): ", p[idx].waktu)
+		fmt.Println(" Waktu (dd mm yyyy): ", p[idx].day, "-", p[idx].month, "-", p[idx].year)
 		fmt.Println("|------------------------------------------|")
 		fmt.Println()
 	} else {
@@ -345,7 +345,7 @@ func binSearch(p projects, n int) {
 		fmt.Println(" Nama Project: ", p[idx].nama)
 		fmt.Println(" kategori: ", p[idx].kategori)
 		fmt.Println(" Tingkat kesulitan (1-10): ", p[idx].tingkatKesulitan)
-		fmt.Println(" Waktu (dd-mm-yyyy): ", p[idx].waktu)
+		fmt.Println(" Waktu (dd mm yyyy): ", p[idx].day, "-", p[idx].month, "-", p[idx].year)
 		fmt.Println("|------------------------------------------|")
 		fmt.Println()
 	} else {
@@ -403,7 +403,7 @@ func insSort(p *projects, n int) {
 		// Geser elemen-elemen yang lebih besar dari temp ke kanan
 		// untuk membuat ruang bagi temp pada posisi yang benar.
 		// Perbandingan dilakukan berdasarkan 'waktu'.
-		for j >= 0 && p[j].waktu > temp.waktu {
+		for j >= 0 && p[j].year > temp.year {
 			p[j+1] = p[j] // Geser elemen ke kanan.
 			j--           // Pindah ke elemen sebelumnya.
 		}
