@@ -16,13 +16,13 @@ type projects [NMAX]Project
    - nama: Nama project (string).
    - kategori: Kategori project (string).
    - tingkatKesulitan: Tingkat kesulitan project (integer),skala 1-10.
-   - waktu: Waktu atau tanggal project (integer), diharapkan dalam format seperti "dd mm yyyy".
+   - waktu: Waktu atau tanggal project (string), diharapkan dalam format seperti "dd-mm-yyyy".
 */
 type Project struct {
 	nama             string
 	kategori         string
 	tingkatKesulitan int
-	day, month, year int
+	waktu            string
 }
 
 	//main adalah fungsi utama program dan merupakan 
@@ -79,6 +79,7 @@ func menu() {
 			fmt.Println("-----------------------------------------------")
 			fmt.Println("| 1. -> Cari berdasarkan nama                 |")
 			fmt.Println("| 2. -> Cari berdasarkan tingkat kesulitan    |")
+			fmt.Println("| 3. -> Kembali                               |")
 			fmt.Println("-----------------------------------------------")
 
 			fmt.Print(" Pilih: ")
@@ -98,7 +99,8 @@ func menu() {
 
 			fmt.Println("-----------------------------------------------")
 			fmt.Println("| 1. -> Urutkan berdasarkan tingkat kesulitan |")
-			fmt.Println("| 2. -> Urutkan berdasarkan tahun             |")
+			fmt.Println("| 2. -> Urutkan berdasarkan waktu             |")
+			fmt.Println("| 3. -> Kembali                               |")
 			fmt.Println("-----------------------------------------------")
 
 			fmt.Print(" Pilih: ")
@@ -115,7 +117,7 @@ func menu() {
 			}
 
 		default: // Opsi jika pilihan tidak ada dalam menu.
-			fmt.Println("SELAMAT TINGGAL")
+			fmt.Println("~ SELAMAT TINGGAL ~")
 		}
 
 		if pilihan == 4 { // Keluar dari loop jika pengguna memilih opsi '4'.
@@ -126,7 +128,7 @@ func menu() {
 
 /*
    ProjectUser adalah fungsi yang menampilkan sub-menu untuk operasi manajemen project.
-   Ini memungkinkan pengguna memilih antara menambah, menampilkan, mengubah, atau menghapus project.
+   function ini dibuat agar pengguna dapat memilih antara menambah, menampilkan, mengubah, atau menghapus project.
    Mengembalikan pilihan pengguna dari sub-menu ini.
 */
 func ProjectUser(p projects, nProject int) int {
@@ -137,6 +139,7 @@ func ProjectUser(p projects, nProject int) int {
 	fmt.Println("| 2. -> Tampilkan Semua Project            |")
 	fmt.Println("| 3. -> Ubah Project                       |")
 	fmt.Println("| 4. -> Hapus Project                      |")
+	fmt.Println("| 5. -> Kembali                            |")
 	fmt.Println("--------------------------------------------")
 
 	fmt.Print(" Pilih: ")
@@ -147,7 +150,7 @@ func ProjectUser(p projects, nProject int) int {
 }
 
 /*
-   tambahProject berfungsi untuk menambahkan project baru ke dalam daftar.
+   tambahProject, function ini berfungsi untuk menambahkan project baru ke dalam daftar.
    Parameter:
    - p: Pointer ke array projects, memungkinkan modifikasi data asli.
    - nProject: Pointer ke jumlah project saat ini, memungkinkan pembaruan jumlah project.
@@ -161,8 +164,8 @@ func tambahProject(p *projects, nProject *int) {
 
 	fmt.Print("Kategori: ")
 	fmt.Scan(&p[*nProject].kategori) // Meminta dan menyimpan kategori.
-	fmt.Print("Waktu (dd mm yyyy): ")
-	fmt.Scan(&p[*nProject].day, &p[*nProject].month, &p[*nProject].year) // Meminta dan menyimpan waktu.
+	fmt.Print("Waktu (dd-mm-yyyy): ")
+	fmt.Scan(&p[*nProject].waktu) // Meminta dan menyimpan waktu.
 
 	*nProject = *nProject + 1 // Menambah jumlah project setelah penambahan.
 
@@ -173,7 +176,7 @@ func tambahProject(p *projects, nProject *int) {
 }
 
 /*
-   tampilkanProject berfungsi untuk menampilkan detail semua project yang ada.
+   tampilkanProject, function ini berfungsi untuk menampilkan detail semua project yang ada.
    Parameter:
    - p: Array projects yang berisi data project.
    - nProject: Jumlah project yang ada saat ini.
@@ -183,21 +186,21 @@ func tampilkanProject(p projects, nProject int) {
 		fmt.Println("Maaf Data Belum Tersedia")
 	}
 
-	for i := 0; i < nProject; i++ { // Melakukan iterasi untuk setiap project.
+	for i := 0; i < nProject; i++ { // Melakukan perulangan untuk setiap project.
 		fmt.Println("|------------------------------------------|")
-		fmt.Println("|[Project]", i+1, "|","                            |")
+		fmt.Println("|[Project]", i+1, "|", "                            |")
 		fmt.Println("|------------------------------------------|")
 		fmt.Println(" Nama Project: ", p[i].nama)               // Menampilkan nama project.
 		fmt.Println(" kategori: ", p[i].kategori)               // Menampilkan kategori project.
 		fmt.Println(" Tingkat kesulitan (1-10): ", p[i].tingkatKesulitan) // Menampilkan tingkat kesulitan.
-		fmt.Println(" Waktu (dd mm yyyy): ", p[i].day, "-", p[i].month, "-", p[i].year) // Menampilkan waktu project.
+		fmt.Println(" Waktu (dd-mm-yyyy): ", p[i].waktu)         // Menampilkan waktu project.
 	}
 	fmt.Println("|------------------------------------------|")
 	fmt.Println()
 }
 
 /*
-   ubahProject berfungsi untuk memodifikasi detail project yang sudah ada.
+   ubahProject, function ini berfungsi untuk memodifikasi detail project yang sudah ada.
    Parameter:
    - p: Pointer ke array projects, memungkinkan modifikasi data asli.
    - nProject: Jumlah project yang ada saat ini.
@@ -218,8 +221,8 @@ func ubahProject(p *projects, nProject int) {
 
 		fmt.Print("kategori: ")
 		fmt.Scan(&p[ubah].kategori) // Meminta dan menyimpan kategori baru.
-		fmt.Print("Waktu (dd mm yyyy): ")
-		fmt.Scan(&p[ubah].day, &p[ubah].month, &p[ubah].year) // Meminta dan menyimpan waktu baru.
+		fmt.Print("Waktu (dd-mm-yyyy): ")
+		fmt.Scan(&p[ubah].waktu) // Meminta dan menyimpan waktu baru.
 		fmt.Println()
 
 		fmt.Println("Project berhasil diubah!!")
@@ -231,7 +234,7 @@ func ubahProject(p *projects, nProject int) {
 }
 
 /*
-   hapusProject berfungsi untuk menghapus project dari daftar.
+   hapusProject, function ini berfungsi untuk menghapus project dari daftar.
    Parameter:
    - p: Pointer ke array projects, memungkinkan modifikasi data asli.
    - nProject: Pointer ke jumlah project saat ini, memungkinkan pembaruan jumlah project.
@@ -256,14 +259,14 @@ func hapusProject(p *projects, nProject *int) {
 }
 
 /*
-   seqSearch adalah fungsi untuk melakukan pencarian sekuensial (linear search)
+   seqSearch adalah function untuk melakukan pencarian sekuensial (linear search)
    berdasarkan nama project.
    Parameter:
    - p: Array projects yang berisi data project.
    - n: Jumlah project yang ada saat ini.
 */
 func seqSearch(p projects, n int) {
-	var i, idx int // i untuk iterasi, idx untuk menyimpan indeks ditemukan.
+	var i, idx int // i untuk perulangan, idx untuk menyimpan indeks ditemukan.
 	var x string   // x untuk menyimpan nama project yang dicari.
 
 	i = 0
@@ -273,7 +276,7 @@ func seqSearch(p projects, n int) {
 	fmt.Scan(&x) // Meminta nama project yang akan dicari.
 	fmt.Println()
 
-	// Melakukan iterasi selama belum mencapai akhir array dan belum ditemukan.
+	// Melakukan perulangan selama belum mencapai akhir array dan belum ditemukan.
 	for i < n && idx == -1 {
 		if p[i].nama == x { // Jika nama project cocok.
 			idx = i // Simpan indeks project yang ditemukan.
@@ -284,24 +287,23 @@ func seqSearch(p projects, n int) {
 	if idx != -1 { // Jika project ditemukan (idx bukan -1).
 		fmt.Println("|------------------------------------------|")
 		// Menampilkan detail project yang ditemukan.
-		fmt.Println("|[Project]", idx+1, "|","                            |")
+		fmt.Println("|[Project]", idx+1, "|", "                                    |")
 		fmt.Println("|------------------------------------------|")
 		// Gunakan 'idx' untuk menampilkan data project yang ditemukan, bukan 'i'
 		// Karena 'i' akan menjadi n jika tidak ditemukan atau 1 lebih dari 'idx' jika ditemukan
 		fmt.Println(" Nama Project: ", p[idx].nama)
 		fmt.Println(" kategori: ", p[idx].kategori)
 		fmt.Println(" Tingkat kesulitan (1-10): ", p[idx].tingkatKesulitan)
-		fmt.Println(" Waktu (dd mm yyyy): ", p[idx].day, "-", p[idx].month, "-", p[idx].year)
+		fmt.Println(" Waktu (dd-mm-yyyy): ", p[idx].waktu)
 		fmt.Println("|------------------------------------------|")
 		fmt.Println()
 	} else {
 		fmt.Println("Project tidak ditemukan") // Pesan jika project tidak ditemukan.
-		fmt.Println()
 	}
 }
 
 /*
-   binSearch adalah fungsi untuk melakukan pencarian biner (binary search)
+   binSearch adalah function untuk melakukan pencarian biner (binary search)
    berdasarkan tingkat kesulitan project.
    Penting: Fungsi ini mengasumsikan bahwa data project sudah terurut
    berdasarkan tingkat kesulitan secara menaik (ascending) sebelum dipanggil.
@@ -321,7 +323,7 @@ func binSearch(p projects, n int) {
 	fmt.Scan(&x) // Meminta tingkat kesulitan yang akan dicari.
 	fmt.Println()
 
-	// Melakukan iterasi selama batas kiri kurang dari atau sama dengan batas kanan
+	// Melakukan perulangan selama batas kiri kurang dari atau sama dengan batas kanan
 	// dan project belum ditemukan.
 	for kiri <= kanan && idx == -1 {
 		tengah = (kiri + kanan) / 2 // Menghitung indeks tengah.
@@ -337,20 +339,17 @@ func binSearch(p projects, n int) {
 
 	if idx != -1 { // Jika project ditemukan.
 		fmt.Println("|------------------------------------------|")
+		fmt.Println(" [Project]", idx+1)
+		fmt.Println()
 		// Menampilkan detail project yang ditemukan.
-		fmt.Println("|[Project]", idx+1, "|","                            |")
-		fmt.Println("|------------------------------------------|")
-		// Gunakan 'idx' untuk menampilkan data project yang ditemukan, bukan 'i'
-		// Karena 'i' akan menjadi n jika tidak ditemukan atau 1 lebih dari 'idx' jika ditemukan
 		fmt.Println(" Nama Project: ", p[idx].nama)
 		fmt.Println(" kategori: ", p[idx].kategori)
-		fmt.Println(" Tingkat kesulitan (1-10): ", p[idx].tingkatKesulitan)
-		fmt.Println(" Waktu (dd mm yyyy): ", p[idx].day, "-", p[idx].month, "-", p[idx].year)
+		fmt.Println(" Tingkat kesulitan (1-10):", p[idx].tingkatKesulitan)
+		fmt.Println(" Waktu (dd-mm-yyyy): ", p[idx].waktu)
 		fmt.Println("|------------------------------------------|")
 		fmt.Println()
 	} else {
 		fmt.Println("Project tidak ditemukan") // Pesan jika project tidak ditemukan.
-		fmt.Println()
 	}
 }
 
@@ -362,12 +361,12 @@ func binSearch(p projects, n int) {
    - n: Jumlah project yang ada saat ini.
 */
 func selSort(p *projects, n int) {
-	var pass, idx, i int // Variabel untuk pass, indeks minimum, dan iterasi.
+	var pass, idx, i int // Variabel untuk pass, indeks minimum, dan perulangan.
 	var temp Project     // Variabel sementara untuk pertukaran elemen.
 
 	pass = 1 // Pass pertama dimulai dari 1.
 
-	for pass <= n-1 { // Melakukan iterasi sebanyak n-1 pass.
+	for pass <= n-1 { // Melakukan perulangan sebanyak n-1 pass.
 		idx = pass - 1 // Awalnya, indeks elemen minimum adalah elemen pertama dari bagian yang belum terurut.
 		i = pass       // Mulai pencarian elemen minimum dari elemen berikutnya.
 
@@ -389,7 +388,7 @@ func selSort(p *projects, n int) {
 }
 
 /*
-   insSort adalah fungsi yang mengimplementasikan algoritma Insertion Sort.
+   insSort adalah function yang mengimplementasikan algoritma Insertion Sort.
    Ini mengurutkan array project berdasarkan waktu secara menaik (ascending).
    Parameter:
    - p: Pointer ke array projects, memungkinkan modifikasi data asli (pengurutan).
@@ -403,7 +402,7 @@ func insSort(p *projects, n int) {
 		// Geser elemen-elemen yang lebih besar dari temp ke kanan
 		// untuk membuat ruang bagi temp pada posisi yang benar.
 		// Perbandingan dilakukan berdasarkan 'waktu'.
-		for j >= 0 && p[j].year > temp.year {
+		for j >= 0 && p[j].waktu > temp.waktu {
 			p[j+1] = p[j] // Geser elemen ke kanan.
 			j--           // Pindah ke elemen sebelumnya.
 		}
