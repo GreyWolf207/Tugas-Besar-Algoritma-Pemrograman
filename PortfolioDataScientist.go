@@ -395,13 +395,13 @@ func selSort(p *projects, n int) {
    - n: Jumlah project yang ada saat ini.
 */
 func insSort(p *projects, n int) {
+	var temp Project
 	for i := 1; i < n; i++ { // Memulai dari elemen kedua (indeks 1).
 		j := i - 1     // Indeks elemen sebelumnya.
-		temp := p[i]   // Menyimpan elemen saat ini untuk disisipkan.
+		temp = p[i]   // Menyimpan elemen saat ini untuk disisipkan.
 
 		// Geser elemen-elemen yang lebih besar dari temp ke kanan
-		// untuk membuat ruang bagi temp pada posisi yang benar.
-		// Perbandingan dilakukan berdasarkan 'waktu'.
+		// untuk membuat ruang bagi temp pada posisi yang benar.ss
 		for j >= 0 && p[j].waktu > temp.waktu {
 			p[j+1] = p[j] // Geser elemen ke kanan.
 			j--           // Pindah ke elemen sebelumnya.
